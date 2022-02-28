@@ -1,0 +1,25 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+#topHeader{
+  width: 70%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+}
+
+#logoSection{
+  grid-column: 1 / 4;
+}
+
+#searchSection{
+  grid-column: 4 / 10;
+}
+
+#iconSection{
+  grid-column: 10 / -1;
+}
