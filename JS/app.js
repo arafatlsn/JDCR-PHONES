@@ -3,9 +3,9 @@ const catchApi = () => {
   const searchButton = document.getElementById('searchButton');
   searchButton.addEventListener('click', function(){
 
-    const inputField = document.getElementById('inputField');
+    const searchField = document.getElementById('searchField');
 
-    const url = `https://openapi.programming-hero.com/api/phones?search=${inputField.value}`;
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchField.value}`;
 
     fetch(url)
   .then(res => res.json())
