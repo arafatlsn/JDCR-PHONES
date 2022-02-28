@@ -21,5 +21,12 @@
 }
 
 #iconSection{
-  grid-column: 10 / -1;
+  grid-column: 11 / -1;
+}
+
+/* SHOW PHONE AREA  */
+#showPhoneSection{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
 }
