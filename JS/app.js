@@ -40,7 +40,7 @@ const showPhoneFunc = phones => {
             <p style="text-align: center; font-weight: 500;"><span>$</span><span>${(Math.random()*1000).toFixed(2)}</span></p>
             <div class="d-flex justify-content-center">
               <p style="color: #ED6908;"><i class="fa-solid fa-cart-arrow-down fs-5"></i></p>
-              <p class="detailsButton" style="color: #0E9BC9"><i class="fa-solid fa-circle-info fs-5 mx-3"></i></p>
+              <p class="detailsButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" style="color: #0E9BC9"><i class="fa-solid fa-circle-info fs-5 mx-3"></i></p>
             </div>
           </div>
         </div>
@@ -90,15 +90,16 @@ const showPhoneFunc = phones => {
       console.log(details)
       console.log(details.data)
 
-      const detailsParent = document.getElementById('detailsParent');
+      const showDetailsParent = document.getElementById('showDetailsParent');
 
-      detailsParent.innerHTML = '';
+      showDetailsParent.innerHTML = '';
 
       const makeDivForModal = document.createElement('div');
       makeDivForModal.classList.add('showDetailsParent');
+      makeDivForModal.setAttribute('id', 'showModal')
 
       makeDivForModal.innerHTML = `
-      <div id="showDetailsImage">
+          <div id="showDetailsImage">
             <img src=${details.data.image}>
           </div>
           <div id="showDetailsText">
@@ -124,12 +125,12 @@ const showPhoneFunc = phones => {
               </div>
               <div class="border" style="grid-column: 3 / -1;">
                 <div>
-                  <h6"> Bluetooth: ${details.data.others.Bluetooth}</h6>
-                  <h6"> GPS: ${details.data.others.GPS}</h6>
-                  <h6"> NFC: ${details.data.others.NFC}</h6>
-                  <h6"> Radio: ${details.data.others.Radio}</h6>
-                  <h6"> USB: ${details.data.others.USB}</h6>
-                  <h6"> WLAN: ${details.data.others.WLAN}</h6>
+                  <h6 class="border"> Bluetooth: ${details.data.others.Bluetooth}</h6>
+                  <h6 class="border"> GPS: ${details.data.others.GPS}</h6>
+                  <h6 class="border"> NFC: ${details.data.others.NFC}</h6>
+                  <h6 class="border"> Radio: ${details.data.others.Radio}</h6>
+                  <h6 class="border"> USB: ${details.data.others.USB}</h6>
+                  <h6 class="border"> WLAN: ${details.data.others.WLAN}</h6>
                 </div>
             </div>
             </div>
@@ -139,16 +140,16 @@ const showPhoneFunc = phones => {
                 <h5>Sensor</h5>
               </div>
               <div class="border" style="grid-column: 3 / -1;">
-                <h5>
-                  ${details.data.sensors}
-                </h5>
+                <h6 style="word-break: break-all">
+                  ${details.data.mainFeatures.sensors}
+                </h6>
             </div>
             </div>
 
           </div>
       `;
 
-      detailsParent.appendChild(makeDivForModal);
+      showDetailsParent.appendChild(makeDivForModal);
 
     }
 
