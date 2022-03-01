@@ -20,6 +20,9 @@ const showPhoneFunc = phones => {
 
   console.log(phones)
   const showPhoneSection = document.getElementById('showPhoneSection');
+  const loadMorePhonesParent = document.getElementById('loadMorePhonesParent');
+  const loadMorePhones = document.getElementById('loadMorePhones');
+  const loadMoreDiv = document.getElementById('loadMoreDiv');
 
   showPhoneSection.innerHTML = '';
 
@@ -46,8 +49,30 @@ const showPhoneFunc = phones => {
         </div>
     `;
 
-    // APPEND SEARCH PHONES 
-    showPhoneSection.appendChild(makeCard);
+    console.log(emptyArr.length)
+
+    if(emptyArr.length <= 20){
+
+      loadMoreDiv.style.display = 'none';
+
+      // APPEND SEARCH PHONES 
+      showPhoneSection.appendChild(makeCard);
+
+    }
+
+    if(emptyArr.length > 20){
+      loadMoreDiv.style.display = 'block';
+      loadMorePhones.appendChild(makeCard);
+    }
+
+
+    loadMoreDiv.addEventListener('click', function(){
+      loadMorePhonesParent.style.display = 'block';
+      loadMoreDiv.style.display = 'none';
+
+    })
+
+    
   })
 
   const catchDetailApi = () => {

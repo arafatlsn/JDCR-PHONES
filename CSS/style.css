@@ -26,7 +26,6 @@
 
 /* SHOW PHONE AREA  */
 #showPhoneSection{
-  
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
@@ -43,3 +42,20 @@
   justify-self: center;
   padding: 1rem 0;
 }
+
+#loadMorePhones{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  justify-content: center;
+}
+
+#loadMoreDiv{
+  display: none;
+}
+
+#loadMorePhonesParent{
+  display: none;
+  margin-top: 2rem;
+}
+
