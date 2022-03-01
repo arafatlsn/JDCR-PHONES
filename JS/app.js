@@ -12,6 +12,7 @@ const catchApi = () => {
     .then(data => getErrFunc(data.data.length));
 
     const searchResultDiv = document.getElementById('searchResultDiv');
+    const searchResultDivNotFnd = document.getElementById('searchResultDivNotFnd');
 
 
     const getErrFunc = lengthNumber => {
@@ -24,17 +25,18 @@ const catchApi = () => {
         <h4 class="text-center py-2 mb-4" style="color: #A6BAD1;">YOUR SEARCH '${searchField.value}' RESULT IS NOT FOUND</h4>
         `;
 
-        searchResultDiv.style = 'width: 100%; position: absolute; top: 50%; left: 0; right: 0;'
-
+        searchResultDivNotFnd.style = 'width: 100%; position: absolute; top: 50%; left: 0; right: 0;';
+        
         searchResultDiv.innerHTML = '';
-        searchResultDiv.appendChild(makeDivSearchErr);
+        searchResultDivNotFnd.innerHTML = '';
+        searchResultDivNotFnd.appendChild(makeDivSearchErr);
       }
       else{
         const makeDivSearchFound = document.createElement('div');
         makeDivSearchFound.innerHTML = `
         <h4 class="text-center py-2 mb-4" style=" color: #A6BAD1;  background-color: #DFF0D8">YOUR SEARCH '${searchField.value}' RESULT IS ${lengthNumber}</h4>
         `;
-
+        searchResultDivNotFnd.innerHTML = '';
         searchResultDiv.innerHTML = '';
         searchResultDiv.appendChild(makeDivSearchFound);
       }
