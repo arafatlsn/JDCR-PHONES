@@ -88,6 +88,68 @@ const showPhoneFunc = phones => {
 
     const showDetailsOnUi = details => {
       console.log(details)
+      console.log(details.data)
+
+      const detailsParent = document.getElementById('detailsParent');
+
+      detailsParent.innerHTML = '';
+
+      const makeDivForModal = document.createElement('div');
+      makeDivForModal.classList.add('showDetailsParent');
+
+      makeDivForModal.innerHTML = `
+      <div id="showDetailsImage">
+            <img src=${details.data.image}>
+          </div>
+          <div id="showDetailsText">
+            <div class="border">
+              <h3>${details.data.name}</h3>
+              <p>${details.data.releaseDate}</p>
+            </div>
+
+            <div class="border" style="display: grid; grid-template-columns: repeat(12, 1fr);">
+              <div style="grid-column: 1 / 2;">
+                <h5>Features</h5>
+              </div>
+              <div class="border" style="grid-column: 3 / -1;">
+                <h5>
+                  ${details.data.mainFeatures.chipSet+ ', ' + details.data.mainFeatures.displaySize+ ', ' + details.data.mainFeatures.memory}
+                </h5>
+            </div>
+            </div>
+
+            <div class="border" style="display: grid; grid-template-columns: repeat(12, 1fr);">
+              <div style="grid-column: 1 / 2;">
+                <h5>Others</h5>
+              </div>
+              <div class="border" style="grid-column: 3 / -1;">
+                <div>
+                  <h6"> Bluetooth: ${details.data.others.Bluetooth}</h6>
+                  <h6"> GPS: ${details.data.others.GPS}</h6>
+                  <h6"> NFC: ${details.data.others.NFC}</h6>
+                  <h6"> Radio: ${details.data.others.Radio}</h6>
+                  <h6"> USB: ${details.data.others.USB}</h6>
+                  <h6"> WLAN: ${details.data.others.WLAN}</h6>
+                </div>
+            </div>
+            </div>
+
+            <div class="border" style="display: grid; grid-template-columns: repeat(12, 1fr);">
+              <div style="grid-column: 1 / 2;">
+                <h5>Sensor</h5>
+              </div>
+              <div class="border" style="grid-column: 3 / -1;">
+                <h5>
+                  ${details.data.sensors}
+                </h5>
+            </div>
+            </div>
+
+          </div>
+      `;
+
+      detailsParent.appendChild(makeDivForModal);
+
     }
 
 
