@@ -8,6 +8,39 @@ const catchApi = () => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchField.value}`;
 
     fetch(url)
+    .then(res => res.json())
+    .then(data => getErrFunc(data.data.length));
+
+    const searchResultDiv = document.getElementById('searchResultDiv');
+
+
+    const getErrFunc = lengthNumber => {
+      if(lengthNumber == 0){
+
+        const loadMoreDiv = document.getElementById('loadMoreDiv').style.display = 'none';
+        
+        const makeDivSearchErr = document.createElement('div');
+        makeDivSearchErr.innerHTML = `
+        <h4 class="text-center py-2 mb-4" style="color: #A6BAD1;">YOUR SEARCH '${searchField.value}' RESULT IS NOT FOUND</h4>
+        `;
+
+        searchResultDiv.style = 'width: 100%; position: absolute; top: 50%; left: 0; right: 0;'
+
+        searchResultDiv.innerHTML = '';
+        searchResultDiv.appendChild(makeDivSearchErr);
+      }
+      else{
+        const makeDivSearchFound = document.createElement('div');
+        makeDivSearchFound.innerHTML = `
+        <h4 class="text-center py-2 mb-4" style=" color: #A6BAD1;  background-color: #DFF0D8">YOUR SEARCH '${searchField.value}' RESULT IS ${lengthNumber}</h4>
+        `;
+
+        searchResultDiv.innerHTML = '';
+        searchResultDiv.appendChild(makeDivSearchFound);
+      }
+    }
+
+    fetch(url)
   .then(res => res.json())
   .then(data => showPhoneFunc(data))
 
@@ -18,7 +51,6 @@ const catchApi = () => {
 
 const showPhoneFunc = phones => {
 
-  console.log(phones)
   const showPhoneSection = document.getElementById('showPhoneSection');
   const loadMorePhonesParent = document.getElementById('loadMorePhonesParent');
   const loadMorePhones = document.getElementById('loadMorePhones');
@@ -30,7 +62,7 @@ const showPhoneFunc = phones => {
 
       // GET ALL PHONE OBJECT 
   const elPhones = phones.data.forEach(phone => {
-    // console.log(phone);
+
     emptyArr.push(phone.phone_name);
 
     const makeCard = document.createElement('div');
@@ -48,8 +80,6 @@ const showPhoneFunc = phones => {
           </div>
         </div>
     `;
-
-    console.log(emptyArr.length)
 
     if(emptyArr.length <= 20){
 
@@ -77,7 +107,6 @@ const showPhoneFunc = phones => {
 
   const catchDetailApi = () => {
 
-    console.log(phones.data)
     const getAllSlugs = phones.data;
     const getSlug = getAllSlugs.forEach(singlePhone => {
       // console.log(singlePhone.slug)
