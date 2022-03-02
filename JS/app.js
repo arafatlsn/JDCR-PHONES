@@ -27,7 +27,7 @@ const catchApi = () => {
         
         const makeDivSearchErr = document.createElement('div');
         makeDivSearchErr.innerHTML = `
-        <h4 class="text-center py-2 mb-4" style="color: #3a3b3c; background-color: #FF7F7F">YOUR SEARCH '${searchField.value}' RESULT IS NOT FOUND</h4>
+        <h4 class="text-center py-2 mb-4" style="color: #d0342c; background-color: #d6d6d6">YOUR SEARCH '${searchField.value}' RESULT IS NOT FOUND</h4>
         `;
 
         searchResultDiv.innerHTML = '';
