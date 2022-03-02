@@ -9,18 +9,18 @@
     padding: 0;
     margin: 0;
     justify-self: center;
-    order: 2;
+    order: 1;
   }
   
   #searchSection{
     grid-column: 1 / -1;
     justify-self: center;
-    order: 3;
+    order: 2;
   }
   
   #iconSection{
     grid-column: 1 / -1;
-    order: 1;
+    order: 3;
     justify-self: center;
 
   }
