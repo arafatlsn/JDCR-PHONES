@@ -29,7 +29,7 @@ const catchApi = () => {
         makeDivSearchErr.innerHTML = `
         <h4 class="text-center py-2 mb-4" style="color: #A6BAD1;">YOUR SEARCH '${searchField.value}' RESULT IS NOT FOUND</h4>
         `;
-        
+
         searchResultDiv.innerHTML = '';
         searchResultDivNotFnd.innerHTML = '';
         searchResultDivNotFnd.appendChild(makeDivSearchErr);
@@ -107,7 +107,7 @@ const showPhoneFunc = phones => {
       const makeLoadButton = document.createElement('div');
       makeLoadButton.innerHTML = `
       <div class="w-50 mx-auto mt-5 mb-3">
-        <button class="btn-dark py-1 px-3 fs-5 rounded">LOAD ALL PHONES<span class="ms-2"><i class="fa-solid fa-angle-down"></i></span></button>
+        <button class="py-1 px-3 fs-5 fw-bold rounded border" style="color: rgb(255,69,0)">LOAD ALL PHONES<span class="ms-2"><i class="fa-solid fa-angle-down"></i></span></button>
       </div>
       `;
 
