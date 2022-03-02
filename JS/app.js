@@ -3,9 +3,13 @@ const catchApi = () => {
   const searchButton = document.getElementById('searchButton');
   searchButton.addEventListener('click', function(){
 
-    const searchField = document.getElementById('searchField');
+    
 
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchField.value}`;
+    const searchField = document.getElementById('searchField');
+    const searchFieldValue = searchField.value.toLowerCase();
+    console.log(searchFieldValue)
+
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchFieldValue}`;
 
     fetch(url)
     .then(res => res.json())
@@ -61,6 +65,7 @@ const showPhoneFunc = phones => {
   showPhoneSection.innerHTML = '';
 
   const emptyArr = [];
+  let emptyString = '';
 
       // GET ALL PHONE OBJECT 
   const elPhones = phones.data.forEach(phone => {
@@ -143,8 +148,18 @@ const showPhoneFunc = phones => {
     })
 
     const showDetailsOnUi = details => {
-      console.log(details)
-      console.log(details.data)
+      // console.log(details)
+      // console.log(details.data)
+
+      console.log(typeof(details.data.releaseDate))
+
+      if(details.data.releaseDate == ''){
+        emptyString = 'Release Date Not Found'
+      }
+
+      else{
+        emptyString = details.data.releaseDate;
+      }
 
       const showDetailsParent = document.getElementById('showDetailsParent');
 
@@ -161,7 +176,7 @@ const showPhoneFunc = phones => {
           <div id="showDetailsText">
             <div class="border">
               <h3>${details.data.name}</h3>
-              <p>${details.data.releaseDate}</p>
+              <p>${emptyString}</p>
             </div>
 
             <div class="border" style="display: grid; grid-template-columns: repeat(12, 1fr);">

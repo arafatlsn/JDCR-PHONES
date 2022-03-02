@@ -20,12 +20,17 @@
   grid-column: 4 / 10;
 }
 
+#searchField{
+  width: 75%;
+}
+
 #iconSection{
   grid-column: 11 / -1;
 }
 
 /* SHOW PHONE AREA  */
 #showPhoneSection{
+  width: 50%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
@@ -56,6 +61,6 @@
 
 #loadMorePhonesParent{
   display: none;
-  margin-top: 2rem;
+  margin: 2rem;
 }
 

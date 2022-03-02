@@ -1,0 +1,47 @@
+@media screen and (max-width: 480px){
+
+  #topHeader{
+    width: 100%;
+  }
+
+  #logoSection{
+    grid-column: 1 / -1;
+    padding: 0;
+    margin: 0;
+    justify-self: center;
+    order: 2;
+  }
+  
+  #searchSection{
+    grid-column: 1 / -1;
+    justify-self: center;
+    order: 3;
+  }
+  
+  #iconSection{
+    grid-column: 1 / -1;
+    order: 1;
+    justify-self: center;
+
+  }
+
+  #showPhoneSection {
+    grid-template-columns: 1fr;
+  }
+
+  #loadMorePhones{
+    grid-template-columns: 1fr;
+  }
+
+  #searchField{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  #searchSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
