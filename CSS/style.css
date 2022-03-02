@@ -55,10 +55,6 @@
   justify-content: center;
 }
 
-#loadMoreDiv{
-  /* display: none; */
-}
-
 #loadMorePhonesParent{
   display: none;
   margin: 2rem;

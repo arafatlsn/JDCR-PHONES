@@ -3,7 +3,8 @@ const catchApi = () => {
   const searchButton = document.getElementById('searchButton');
   searchButton.addEventListener('click', function(){
 
-    
+    const showPhoneSection = document.getElementById('showPhoneSection');
+    showPhoneSection.innerHTML = '';
 
     const searchField = document.getElementById('searchField');
     const searchFieldValue = searchField.value.toLowerCase();
@@ -28,8 +29,6 @@ const catchApi = () => {
         makeDivSearchErr.innerHTML = `
         <h4 class="text-center py-2 mb-4" style="color: #A6BAD1;">YOUR SEARCH '${searchField.value}' RESULT IS NOT FOUND</h4>
         `;
-
-        searchResultDivNotFnd.style = 'width: 100%; position: absolute; top: 50%; left: 0; right: 0;';
         
         searchResultDiv.innerHTML = '';
         searchResultDivNotFnd.innerHTML = '';
