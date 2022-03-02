@@ -90,6 +90,11 @@ const showPhoneFunc = phones => {
 
     if(emptyArr.length <= 20){
 
+      // loadMoreDiv.style.display = 'none';
+
+      loadMorePhones.innerHTML = '';
+
+      
       loadMoreDiv.style.display = 'none';
 
       // APPEND SEARCH PHONES 
@@ -99,13 +104,23 @@ const showPhoneFunc = phones => {
 
     if(emptyArr.length > 20){
       loadMoreDiv.style.display = 'block';
+
+      const makeLoadButton = document.createElement('div');
+      makeLoadButton.innerHTML = `
+      <div class="w-50 mx-auto mt-5 mb-3">
+        <button class="btn-dark py-1 px-3 fs-5 rounded">LOAD ALL PHONES<span class="ms-2"><i class="fa-solid fa-angle-down"></i></span></button>
+      </div>
+      `;
+
+      // APPEND LOAD MORE PHONES 
+      loadMoreDiv.innerHTML = '';
+      loadMoreDiv.appendChild(makeLoadButton);
       loadMorePhones.appendChild(makeCard);
     }
 
 
     loadMoreDiv.addEventListener('click', function(){
       loadMorePhonesParent.style.display = 'block';
-      loadMoreDiv.style.display = 'none';
 
     })
 
