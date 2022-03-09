@@ -27,7 +27,7 @@ const catchApi = () => {
         
         const makeDivSearchErr = document.createElement('div');
         makeDivSearchErr.innerHTML = `
-        <h4 class="text-center py-2 mb-4" style="color: #d0342c; background-color: #d6d6d6">YOUR SEARCH '${searchField.value}' RESULT IS NOT FOUND</h4>
+        <h4 class="text-center py-2 mb-4 search_text" style="color: #d0342c; background-color: #d6d6d6">YOUR SEARCH '${searchField.value}' RESULT IS NOT FOUND</h4>
         `;
 
         searchResultDiv.innerHTML = '';
@@ -37,7 +37,7 @@ const catchApi = () => {
       else{
         const makeDivSearchFound = document.createElement('div');
         makeDivSearchFound.innerHTML = `
-        <h4 class="text-center py-2 mb-4" style=" color: #3a3b3c;  background-color: #90ee90">YOUR SEARCH '${searchField.value}' RESULT IS ${lengthNumber}</h4>
+        <h4 class="text-center py-2 mb-4 search_text" style=" color: #3a3b3c;  background-color: #90ee90">YOUR SEARCH '${searchField.value}' RESULT IS ${lengthNumber}</h4>
         `;
         searchResultDivNotFnd.innerHTML = '';
         searchResultDiv.innerHTML = '';
@@ -162,18 +162,6 @@ const showPhoneFunc = phones => {
     })
 
     const showDetailsOnUi = details => {
-      // console.log(details)
-      // console.log(details.data)
-
-      console.log(typeof(details.data.releaseDate))
-
-      if(details.data.releaseDate == ''){
-        emptyString = 'Release Date Not Found'
-      }
-
-      else{
-        emptyString = details.data.releaseDate;
-      }
 
       const showDetailsParent = document.getElementById('showDetailsParent');
 
@@ -190,9 +178,8 @@ const showPhoneFunc = phones => {
           <div id="showDetailsText">
             <div class="border">
               <h3>${details.data.name}</h3>
-              <p>${emptyString}</p>
+              <p>${details.data.releaseDate ? details.data.releaseDate : 'DATA NOT FOUND'}</p>
             </div>
-
             <div class="border" style="display: grid; grid-template-columns: repeat(12, 1fr);">
               <div style="grid-column: 1 / 2;">
                 <h5>Features</h5>
@@ -203,23 +190,21 @@ const showPhoneFunc = phones => {
                 </h5>
             </div>
             </div>
-
             <div class="border" style="display: grid; grid-template-columns: repeat(12, 1fr);">
               <div style="grid-column: 1 / 2;">
                 <h5>Others</h5>
               </div>
               <div class="border" style="grid-column: 3 / -1;">
                 <div>
-                  <h6 class="border"> Bluetooth: ${details.data.others.Bluetooth}</h6>
-                  <h6 class="border"> GPS: ${details.data.others.GPS}</h6>
-                  <h6 class="border"> NFC: ${details.data.others.NFC}</h6>
-                  <h6 class="border"> Radio: ${details.data.others.Radio}</h6>
-                  <h6 class="border"> USB: ${details.data.others.USB}</h6>
-                  <h6 class="border"> WLAN: ${details.data.others.WLAN}</h6>
+                  <h6 class="border"> Bluetooth: ${details.data.others ? details.data.others.Bluetooth : 'data not found'}</h6>
+                  <h6 class="border"> GPS: ${details.data.others ? details.data.others.GPS : 'data not found'}</h6>
+                  <h6 class="border"> NFC: ${details.data.others ? details.data.others.NFC : 'data not found'}</h6>
+                  <h6 class="border"> Radio: ${details.data.others ? details.data.Radio : 'data not found'}</h6>
+                  <h6 class="border"> USB: ${details.data.others ? details.data.others.USB : 'data not found'}</h6>
+                  <h6 class="border"> WLAN: ${details.data.others ? details.data.others.WLAN : 'data not found'}</h6>
                 </div>
             </div>
             </div>
-
             <div class="border" style="display: grid; grid-template-columns: repeat(12, 1fr);">
               <div style="grid-column: 1 / 2;">
                 <h5>Sensor</h5>
@@ -230,7 +215,6 @@ const showPhoneFunc = phones => {
                 </h6>
             </div>
             </div>
-
           </div>
       `;
 

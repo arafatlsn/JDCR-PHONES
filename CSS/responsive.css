@@ -44,4 +44,8 @@
     flex-direction: column;
     justify-content: center;
   }
+
+  .search_text{
+    font-size: 1rem;
+  }
 }
