@@ -199,7 +199,7 @@ const showPhoneFunc = phones => {
                   <h6 class="border"> Bluetooth: ${details.data.others ? details.data.others.Bluetooth : 'data not found'}</h6>
                   <h6 class="border"> GPS: ${details.data.others ? details.data.others.GPS : 'data not found'}</h6>
                   <h6 class="border"> NFC: ${details.data.others ? details.data.others.NFC : 'data not found'}</h6>
-                  <h6 class="border"> Radio: ${details.data.others ? details.data.Radio : 'data not found'}</h6>
+                  <h6 class="border"> Radio: ${details.data.others ? details.data.others.Radio : 'data not found'}</h6>
                   <h6 class="border"> USB: ${details.data.others ? details.data.others.USB : 'data not found'}</h6>
                   <h6 class="border"> WLAN: ${details.data.others ? details.data.others.WLAN : 'data not found'}</h6>
                 </div>
