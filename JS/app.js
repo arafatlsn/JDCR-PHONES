@@ -8,7 +8,6 @@ const catchApi = () => {
 
     const searchField = document.getElementById('searchField');
     const searchFieldValue = searchField.value.toLowerCase();
-    console.log(searchFieldValue)
 
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchFieldValue}`;
 
@@ -65,6 +64,7 @@ const showPhoneFunc = phones => {
 
   const emptyArr = [];
   let emptyString = '';
+  let subTotalNumber = [];
 
       // GET ALL PHONE OBJECT 
   const elPhones = phones.data.forEach(phone => {
@@ -80,7 +80,7 @@ const showPhoneFunc = phones => {
             <h6 style="text-align: center;">${phone.phone_name}</h6>
             <p style="text-align: center; font-weight: 500;"><span>$</span><span>${(Math.random()*1000).toFixed(2)}</span></p>
             <div class="d-flex justify-content-center">
-              <p style="color: #ED6908;"><i class="fa-solid fa-cart-arrow-down fs-5"></i></p>
+              <p class="buyButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="color: #ED6908;"><i class="fa-solid fa-cart-arrow-down fs-5"></i></p>
               <p class="detailsButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" style="color: #0E9BC9"><i class="fa-solid fa-circle-info fs-5 mx-3"></i></p>
             </div>
           </div>
@@ -88,8 +88,6 @@ const showPhoneFunc = phones => {
     `;
 
     if(emptyArr.length <= 20){
-
-      // loadMoreDiv.style.display = 'none';
 
       loadMorePhones.innerHTML = '';
 
@@ -117,33 +115,152 @@ const showPhoneFunc = phones => {
       loadMorePhones.appendChild(makeCard);
     }
 
-
-    loadMoreDiv.addEventListener('click', function(){
-      loadMorePhonesParent.style.display = 'block';
-
-    })
-
     
   })
+
+// STORED DATA IN SESSION STORAGE 
+  const makeCart = () => {
+
+    const catchAllBuyButtons = document.getElementsByClassName('buyButton');
+    for(const catchAllBuyButton of catchAllBuyButtons){
+      catchAllBuyButton.addEventListener('click', function(){
+
+        const phoneName = this.parentNode.parentNode.children[0].innerText;
+        const phonePrice = this.parentNode.parentNode.children[1].children[1].innerText;
+        const imageSrc = this.parentNode.parentNode.parentNode.children[1].src;
+
+        const localStrgItem = sessionStorage.getItem('shoping-cart');
+        let objCart;
+        let objCartSub;
+        if(localStrgItem){
+          objCart = JSON.parse(localStrgItem);
+          objCartSub = {};
+          objCartSub['deviceName'] = phoneName;
+          objCartSub['phonePrice'] = phonePrice;
+          objCartSub['image'] = imageSrc;
+          objCart[phoneName.includes(' ') ? phoneName.split(' ') : 'nothing more' ] = objCartSub;
+
+          const objCartStringified = JSON.stringify(objCart)
+          sessionStorage.setItem('shoping-cart', objCartStringified);
+        }
+        else{
+          objCart = {};
+          objCartSub = {};
+          objCartSub['deviceName'] = phoneName;
+          objCartSub['phonePrice'] = phonePrice;
+          objCartSub['image'] = imageSrc;
+          objCart[phoneName.includes(' ') ? phoneName.split(' ') : 'nothing more' ] = objCartSub;
+          const objCartStringified = JSON.stringify(objCart);
+          sessionStorage.setItem('shoping-cart', objCartStringified);
+        }
+        makeDivOffCanvas()
+      })
+    }
+  }
+
+
+  const makeDivOffCanvas = () => {
+
+    const showCartItem = document.getElementById('showCartItem');
+    const subTotalBalance = document.getElementById('subTotalBalance');
+
+    showCartItem.innerHTML = '';
+
+    const getAllDevices = sessionStorage.getItem('shoping-cart');
+    const getAllDevicesStr = JSON.parse(getAllDevices);
+
+    for(const data in getAllDevicesStr){
+
+      const makeCartDiv = document.createElement('div');
+    makeCartDiv.setAttribute('id', 'offCanvas-parent');
+    makeCartDiv.innerHTML = `
+    <!-- image side  -->
+    <div id="offCanvas-img">
+      <img width="60px" height="60px" src="${getAllDevicesStr[data].image}" alt="" style="object-fit: contain;">
+    </div>
+    <!-- text side  -->
+    <div id="offCanvas-text">
+      <div id="offCanvas-sub-div">
+        <div id="offCanvas-sub-child1">
+          <div>
+            <h5 class="p-0 m-0">${getAllDevicesStr[data].deviceName}</h5>
+          </div>
+          <div>
+            <h6 class="p-0 m-0">1 x</h6>
+          </div>
+        </div>
+        <div class="d-flex align-items-center" id="offCanvas-sub-child2">
+          <h2 style="color: #ffc222;">$<span>${getAllDevicesStr[data].phonePrice}</span></h2>
+          <span class="cross-button"><i class="fa-solid fa-circle-xmark fs-5 text-danger ms-3"></i></span>
+        </div>
+      </div>
+    </div>
+    `;
+
+    showCartItem.appendChild(makeCartDiv);
+
+    const objLength = Object.keys(getAllDevicesStr).length;
+    objLength === subTotalNumber.length ? console.log(`don't push`) : subTotalNumber.push(Number(getAllDevicesStr[data].phonePrice));
+
+    catchAllCrossBtn(makeCartDiv);
+
+    }
+    
+    const subTotalSum = subTotalNumber.reduce((a, b) => a + b, 0);
+    subTotalNumber = [];
+    console.log(subTotalSum)
+    subTotalBalance.innerText = subTotalSum.toFixed(2)
+    
+  }
+
+
+  const catchAllCrossBtn = data => {
+
+    const crossButtons = document.getElementsByClassName('cross-button');
+    for(const crossButton of crossButtons){
+      crossButton.addEventListener('click', function(){
+        const getSessionStorage = sessionStorage.getItem('shoping-cart');
+        const getSessionStorageStr = JSON.parse(getSessionStorage);
+        // console.log(getSessionStorageStr);
+        const getDeviceName = this.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[0].innerText;
+        let newObj = {};
+
+        for(const singleData in getSessionStorageStr){
+          // console.log(getSessionStorageStr[singleData].deviceName)
+          if(getSessionStorageStr[singleData].deviceName == getDeviceName){
+            console.log(getSessionStorageStr[singleData])
+            delete getSessionStorageStr[singleData];
+            newObj = getSessionStorageStr;
+            console.log(newObj)
+            const newObjStr = JSON.stringify(newObj);
+            sessionStorage.setItem('shoping-cart', newObjStr)
+          }
+
+
+
+        }
+      })
+
+    }
+    
+
+  }
+
+  
 
   const catchDetailApi = () => {
 
     const getAllSlugs = phones.data;
     const getSlug = getAllSlugs.forEach(singlePhone => {
-      // console.log(singlePhone.slug)
 
       const catchAllDetailsButton = document.getElementsByClassName('detailsButton');
       for(const catchAllDetailsButtonMin of catchAllDetailsButton){
-        // console.log(catchAllDetailsButtonMin)
 
         catchAllDetailsButtonMin.addEventListener('click', function(){
           const getTargetPhoneName = this.parentNode.parentNode.children[0].innerText;
-          // console.log(getTargetPhoneName)
           const phonesDataEl = phones.data.forEach(phoneData => {
-            // console.log(phoneData.phone_name)
 
             if(phoneData.phone_name === getTargetPhoneName){
-              // console.log(phoneData.slug)
 
               const urlTwo = `https://openapi.programming-hero.com/api/phone/${phoneData.slug}`;
               
@@ -226,8 +343,9 @@ const showPhoneFunc = phones => {
     
   };
 
-  
-catchDetailApi()
+  makeCart()
+  catchAllCrossBtn()
+  catchDetailApi()
 
 }
 
