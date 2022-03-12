@@ -62,8 +62,10 @@
 
 /* OFFCANVAS PART  */
 #offCanvas-parent{
+  height: 80px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  align-items: center;
 }
 
 #offCanvas-img{
@@ -85,6 +87,13 @@
 }
 
 #offCanvas-sub-child2{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
   grid-column: 7 / -1;
   align-self: center;
+}
+
+.cross-button{
+  align-self: center;
+  grid-column: 12 / -1;
 }

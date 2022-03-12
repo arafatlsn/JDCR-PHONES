@@ -172,39 +172,40 @@ const showPhoneFunc = phones => {
     for(const data in getAllDevicesStr){
 
       const makeCartDiv = document.createElement('div');
-    makeCartDiv.setAttribute('id', 'offCanvas-parent');
-    makeCartDiv.innerHTML = `
-    <!-- image side  -->
-    <div id="offCanvas-img">
-      <img width="60px" height="60px" src="${getAllDevicesStr[data].image}" alt="" style="object-fit: contain;">
-    </div>
-    <!-- text side  -->
-    <div id="offCanvas-text">
-      <div id="offCanvas-sub-div">
-        <div id="offCanvas-sub-child1">
-          <div>
-            <h5 class="p-0 m-0">${getAllDevicesStr[data].deviceName}</h5>
+      makeCartDiv.classList.add('border-bottom')
+      makeCartDiv.setAttribute('id', 'offCanvas-parent');
+      makeCartDiv.innerHTML = `
+      <!-- image side  -->
+      <div id="offCanvas-img">
+        <img width="60px" height="60px" src="${getAllDevicesStr[data].image}" alt="" style="object-fit: contain;">
+      </div>
+      <!-- text side  -->
+      <div id="offCanvas-text">
+        <div id="offCanvas-sub-div">
+          <div id="offCanvas-sub-child1">
+            <div>
+              <h5 class="p-0 m-0">${getAllDevicesStr[data].deviceName}</h5>
+            </div>
+            <div>
+              <h6 class="p-0 m-0">1 x</h6>
+            </div>
           </div>
-          <div>
-            <h6 class="p-0 m-0">1 x</h6>
+          <div id="offCanvas-sub-child2">
+            <h2 style="color: #ffc222;">$<span>${getAllDevicesStr[data].phonePrice}</span></h2>
+            <span class="cross-button"><i class="fa-solid fa-circle-xmark fs-5 text-danger ms-3"></i></span>
           </div>
-        </div>
-        <div class="d-flex align-items-center" id="offCanvas-sub-child2">
-          <h2 style="color: #ffc222;">$<span>${getAllDevicesStr[data].phonePrice}</span></h2>
-          <span class="cross-button"><i class="fa-solid fa-circle-xmark fs-5 text-danger ms-3"></i></span>
         </div>
       </div>
-    </div>
-    `;
+      `;
 
-    showCartItem.appendChild(makeCartDiv);
+      showCartItem.appendChild(makeCartDiv);
 
-    const objLength = Object.keys(getAllDevicesStr).length;
-    objLength === subTotalNumber.length ? `don't push` : subTotalNumber.push(Number(getAllDevicesStr[data].phonePrice));
+      const objLength = Object.keys(getAllDevicesStr).length;
+      objLength === subTotalNumber.length ? `don't push` : subTotalNumber.push(Number(getAllDevicesStr[data].phonePrice));
 
-    catchAllCrossBtn(makeCartDiv);
+      catchAllCrossBtn(makeCartDiv);
 
-    }
+      }
     
     const subTotalSum = subTotalNumber.reduce((a, b) => a + b, 0);
     subTotalNumber = [];
