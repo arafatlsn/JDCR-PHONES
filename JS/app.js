@@ -200,7 +200,7 @@ const showPhoneFunc = phones => {
     showCartItem.appendChild(makeCartDiv);
 
     const objLength = Object.keys(getAllDevicesStr).length;
-    objLength === subTotalNumber.length ? console.log(`don't push`) : subTotalNumber.push(Number(getAllDevicesStr[data].phonePrice));
+    objLength === subTotalNumber.length ? `don't push` : subTotalNumber.push(Number(getAllDevicesStr[data].phonePrice));
 
     catchAllCrossBtn(makeCartDiv);
 
@@ -208,7 +208,6 @@ const showPhoneFunc = phones => {
     
     const subTotalSum = subTotalNumber.reduce((a, b) => a + b, 0);
     subTotalNumber = [];
-    console.log(subTotalSum)
     subTotalBalance.innerText = subTotalSum.toFixed(2)
     
   }
@@ -221,22 +220,17 @@ const showPhoneFunc = phones => {
       crossButton.addEventListener('click', function(){
         const getSessionStorage = sessionStorage.getItem('shoping-cart');
         const getSessionStorageStr = JSON.parse(getSessionStorage);
-        // console.log(getSessionStorageStr);
         const getDeviceName = this.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[0].innerText;
         let newObj = {};
 
         for(const singleData in getSessionStorageStr){
-          // console.log(getSessionStorageStr[singleData].deviceName)
           if(getSessionStorageStr[singleData].deviceName == getDeviceName){
-            console.log(getSessionStorageStr[singleData])
             delete getSessionStorageStr[singleData];
             newObj = getSessionStorageStr;
-            console.log(newObj)
             const newObjStr = JSON.stringify(newObj);
-            sessionStorage.setItem('shoping-cart', newObjStr)
+            sessionStorage.setItem('shoping-cart', newObjStr);
+            makeDivOffCanvas()
           }
-
-
 
         }
       })
